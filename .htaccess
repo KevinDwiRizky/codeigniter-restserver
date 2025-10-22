@@ -1,0 +1,26 @@
+<IfModule mod_headers.c>
+  RewriteEngine On
+
+  # Cegah akses ke file .env
+  <Files ".env">
+    Order Allow,Deny
+    Deny from all
+  </Files>
+
+  # Mengatur header CORS
+  Header always set Access-Control-Allow-Origin "*"
+  Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS, DELETE, PUT, PATCH"
+  Header always set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+
+  # Tangani preflight request (CORS OPTIONS)
+  RewriteCond %{REQUEST_METHOD} OPTIONS
+  RewriteRule ^(.*)$ - [R=204,L]
+
+  # Nonaktifkan directory browsing
+  Options -Indexes
+
+  # CodeIgniter 3 rewrite rules
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>

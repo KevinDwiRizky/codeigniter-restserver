@@ -51,6 +51,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 // login route
 $route['api/v1/login'] = 'auth/verify';
+$route['api/v1/forward'] = 'forward/execute';
 
 // receiver route
 $route['api/v1/receiver/register'] = 'receiver/receiver_batch';
